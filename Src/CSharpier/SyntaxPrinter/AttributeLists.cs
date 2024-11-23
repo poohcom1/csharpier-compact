@@ -25,7 +25,14 @@ internal static class AttributeLists
 
         if (node is not (ParameterSyntax or TypeParameterSyntax))
         {
-            docs.Add(separator);
+            if (attributeLists.Count > 1 || node is BaseTypeDeclarationSyntax)
+            {
+                docs.Add(separator);
+            }
+            else
+            {
+                docs.Add(" ");
+            }
         }
 
         return Doc.Concat(docs);

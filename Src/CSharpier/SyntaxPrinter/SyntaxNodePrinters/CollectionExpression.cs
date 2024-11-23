@@ -13,13 +13,13 @@ internal static class CollectionExpression
                 or InitializerExpressionSyntax
                 or SimpleLambdaExpressionSyntax
                 or AssignmentExpressionSyntax
-                {
-                    Parent: not (
+            {
+                Parent: not (
                         ObjectCreationExpressionSyntax
                         or InitializerExpressionSyntax
                         or ExpressionStatementSyntax
                     )
-                }
+            }
                 or EqualsValueClauseSyntax { Parent: not VariableDeclaratorSyntax }
             ? Doc.Null
             : Doc.IfBreak(Doc.Line, Doc.Null);
