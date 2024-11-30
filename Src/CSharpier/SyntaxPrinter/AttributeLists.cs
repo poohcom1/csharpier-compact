@@ -25,7 +25,21 @@ internal static class AttributeLists
 
         if (node is not (ParameterSyntax or TypeParameterSyntax))
         {
-            if (attributeLists.Count > 1 || node is BaseTypeDeclarationSyntax)
+            if (
+                attributeLists.Count > 1
+                || node is BaseTypeDeclarationSyntax
+                || node is MethodDeclarationSyntax
+                || (
+                    node is BasePropertyDeclarationSyntax prop
+                    && prop.AccessorList != null
+                    && prop.AccessorList.Accessors.Any(o =>
+                        o.Body != null
+                        || o.ExpressionBody != null
+                        || o.Modifiers.Any()
+                        || o.AttributeLists.Any()
+                    )
+                )
+            )
             {
                 docs.Add(separator);
             }

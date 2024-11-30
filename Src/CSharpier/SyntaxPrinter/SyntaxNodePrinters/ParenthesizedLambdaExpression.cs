@@ -27,10 +27,7 @@ internal static class ParenthesizedLambdaExpression
     {
         return node.Body switch
         {
-            BlockSyntax block => Doc.Concat(
-                block.Statements.Count > 0 ? Doc.HardLine : " ",
-                Block.Print(block, context)
-            ),
+            BlockSyntax block => Doc.Concat("", Block.Print(block, context)),
             _ => Doc.Group(Doc.Indent(Doc.Line, Node.Print(node.Body, context))),
         };
     }
