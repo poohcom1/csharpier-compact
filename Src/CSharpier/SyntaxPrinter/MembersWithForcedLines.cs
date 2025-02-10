@@ -148,7 +148,8 @@ internal static class MembersWithForcedLines
 
             if (!addBlankLine)
             {
-                addBlankLine = member.AttributeLists.Any() || triviaContainsCommentOrNewLine;
+                addBlankLine = /* member.AttributeLists.Any() || */ // don't add line between members if there's attributes.
+                triviaContainsCommentOrNewLine;
             }
 
             if (printExtraNewLines)
